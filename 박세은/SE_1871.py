@@ -1,6 +1,3 @@
-import sys
-sys.stdin = open('input.txt')
-
 N = int(input())  # 번호판의 수
 for nc in range(1, N+1):
     car = input()  # 자동차 번호판
