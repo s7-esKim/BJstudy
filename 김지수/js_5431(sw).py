@@ -2,7 +2,7 @@
 # 수강생 2 <= n <= 100
 
 import sys
-sys.stdin = open('sample_input.txt')
+sys.stdin = open('1209.txt')
 
 T = int(input())
 for tc in range(1, T + 1):

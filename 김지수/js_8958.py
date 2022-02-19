@@ -1,5 +1,4 @@
-# ox 퀴즈
-
+ox 퀴즈
 T = int(input())
 for tc in range(T):
     a = input()
@@ -12,3 +11,5 @@ for tc in range(T):
             score = 0
         total += score
     print(total)
+
+
