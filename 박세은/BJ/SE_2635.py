@@ -18,6 +18,5 @@ for i in range(N+1):           # 두번째 수에 0부터 N까지 넣어보기
         len_max = len(arr)
         answer = arr
 
-print(len_max)
-for i in answer:
-    print(i, end=' ')
+result = ' '.join(map(str, answer))
+print(f'{len_max}\n{result}')
