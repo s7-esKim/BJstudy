@@ -20,4 +20,19 @@ ti는 가게가 오픈한 지 ti초 후에 손님이 주문했음을 뜻하며 c
 from collections import deque
 
 A, B, N = map(int,input().split())
+second_q = deque()
+color_q = deque()
+tot_q = deque()
 
+for n in range(N):
+    second, color, tot = input().split()
+    second_q.append(int(second))
+    color_q.append(color)
+    tot_q.append(int(tot))
+
+visit = [0] * sum(tot_q)
+time = 0
+cnt = 0
+
+while cnt != sum(tot_q):
+    time += 1
