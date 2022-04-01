@@ -13,6 +13,7 @@ if cranes[0] < boxes[0]:                       # 박스 못옮기는 경우
 
 else:
     while boxes:
+        ans += 1
         for i in cranes:
             for j in range(len(boxes)):
                 if i >= boxes[j]:
