@@ -1,50 +1,44 @@
 from collections import deque
-'''
-1.현재 위치를 청소한다.
-2.현재 위치에서 다음을 반복하면서 인접한 칸을 탐색한다.
-    a.현재 위치의 바로 왼쪽에 아직 청소하지 않은 빈 공간이 존재한다면, 왼쪽 방향으로 회전한 다음 한 칸을 전진하고 1번으로 돌아간다. 
-      그렇지 않을 경우, 왼쪽 방향으로 회전한다. 이때, 왼쪽은 현재 바라보는 방향을 기준으로 한다.
-    b.1번으로 돌아가거나 후진하지 않고 2a번 단계가 연속으로 네 번 실행되었을 경우, 바로 뒤쪽이 벽이라면 작동을 멈춘다. 그렇지 않다면 한 칸 후진한다.
-'''
-def rotate(d): # 왼쪽 회전
-    if d == 0:
-        return 3
-    elif d == 1:
-        return 0
-    elif d == 2:
-        return 1
-    elif d == 3:
-        return 2
 
-def bfs(i,j,direction): # i,j: 시작위치 direction: 방향
+def rotate(d):                                                    # 왼쪽 회전
+    if d == 0:                                                    # 북쪽
+        return 3                                                  # 서쪽
+    elif d == 1:                                                  # 동쪽
+        return 0                                                  # 북쪽
+    elif d == 2:                                                  # 남쪽
+        return 1                                                  # 동쪽
+    elif d == 3:                                                  # 서쪽
+        return 2                                                  # 남쪽
+
+def bfs(i,j,direction):                                           # i,j: 시작위치 direction: 방향
     global cnt
     queue = deque([(i,j,direction)])
-    arr[i][j] = -1
-    cnt += 1
+    arr[i][j] = -1                                                # 로봇 청소기가 있는 칸은 빈칸이므로 청소 가능
+    cnt += 1                                                      # 횟수 1 증가
 
     while queue:
         ci, cj, d = queue.popleft()
 
         for i in range(4):
-            d = rotate(d)
-            ni = ci + di[d]
-            nj = cj + dj[d]
+            d = rotate(d)                                          # a. 글 읽어보면 빈 공간이 존재하든 안하든 왼쪽회전은 변함없음
+            ni = ci + di[d]                                        # 회전 후 다음 칸 전진
+            nj = cj + dj[d]                                        # 회전 후 다음 칸 전진
 
             if 0 <= ni < N and 0 <= nj < M and arr[ni][nj] == 0:
                 queue.append((ni,nj,d))
                 cnt += 1
                 arr[ni][nj] = -1
-                break
+                break                                               # BFS 개념이긴 하지만 로봇은 한개이므로 break문 쓰기
 
-        else:
-            ni = ci - di[d]
+        else:                                                       # b. 4번 실행되고도 break를 못 만나면 else문 실행 할수 있도록 설정
+            ni = ci - di[d]                                         # 후진 되는 경우
             nj = cj - dj[d]
-            if 0 <= ni < N and 0 <= nj < M and arr[ni][nj] != 1:
+            if 0 <= ni < N and 0 <= nj < M and arr[ni][nj] != 1:    # 벽이 아닌경우에만 후진 가능
                 queue.append((ni,nj,d))
 
 
 N, M = map(int, input().split())
-r, c, d = map(int, input().split()) # r,c는 로봇 좌표 d는 방향 0 북 1 동 2 남 3 서
+r, c, d = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(N)]
 
 di = [-1,0,1,0]
